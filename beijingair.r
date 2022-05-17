@@ -10,8 +10,7 @@ library(KPC) # Kernel Partial Correlation (KPC)
 library(ppcor) # Partial Correlation (pcor)
 library(CondCopulas) # Conditional Kendall's Tau (CKT)
 library(EDMeasure) # Conditional Mean Dependence (CMD)
-# source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
-source("~/Rworks/bench/parCopCITest.r")
+source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
 
 prsa2010data = read.csv("~/Rworks/beijingair/PRSA_data_2010.1.1-2014.12.31.csv")
 # id: 6(PM2.5), 7(Dew Point), 8(Temperature), 9(Pressure), 11(Cumulative Wind Speed)
@@ -61,7 +60,6 @@ pcit = py1$pcit
 joint1 = cbind(ce,kci,rcot,cdc,gcm,wgcm,codec,kpc,pcor,cmd,pcop,cmi1,cmi2,fcit,ccit,pcit)
 x11()
 corrplot(cor(joint1), method = "shade", order = "hclust", col = COL2(n=200))
-
 
 # plotting
 w1 = 5; h1 = 5
