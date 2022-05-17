@@ -1,2 +1,2 @@
-# eval
+# Evaluating Independence and Conditional Independence Measures
 Code for the Paper "Evaluating Independence and Conditional Independence Measures" which is available at [here](https://arxiv.org/abs/2205.07253) on arXiv. The [heart disease data](https://archive.ics.uci.edu/ml/datasets/heart+disease), [wine quality data](https://archive.ics.uci.edu/ml/datasets/wine+quality), and [Beijing air data](https://archive.ics.uci.edu/ml/datasets/Beijing+PM2.5+Data) from the UCI machine learning repository are used.
