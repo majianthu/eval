@@ -19,7 +19,7 @@ ci1 = np.zeros(10)
 fcit1 = np.zeros(10)
 ccit1 = np.zeros(10)
 pcit1 = np.zeros(10)
-for i in range(0,2):
+for i in range(0,10):
 	rxy = 0.7
 	ryz = 0.6
 	rxz = i/10
