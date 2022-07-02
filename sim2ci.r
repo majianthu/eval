@@ -129,7 +129,7 @@ lines(pcop)
 # x11(width = w1, height = h1)
 plot(cmi1, xlab = "rho", ylab = "CMI1")
 lines(cmi1)
-dev.off()
+
 # cmi2
 x11(width = w1, height = h1)
 plot(cmi2, xlab = "rho", ylab = "CMI2")
