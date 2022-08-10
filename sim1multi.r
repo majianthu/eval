@@ -32,7 +32,7 @@ for (i in 1:n){
   dhsic[i] = dhsic(list(x1 = x[,1], x2 = x[,2], x3 = x[,3]))$dHSIC
   bet[i] = MaxBET(x, 3, index = list(1,2,3))$z.statistic
   mixed[i] = TestIndCopula(x)$stat$cvm
-  nns[i] = NNS.dep(x)$Dependence
+  nns[i] = NNS.dep(x)$Dependence[1,2]
   subcop[i] = dependence(x)[1,2,2]
 }
 
