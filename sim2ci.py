@@ -1,3 +1,7 @@
+# Reminder1: scikit-learn v1.0 is required. If its latest version is used, PCIT will report error.
+# Reminder2: the 'mlxtend' package is required by pcit.
+# Reminder3: knncmi is available at https://github.com/omesner/knncmi.
+
 from copent import ci
 from knncmi import cmi
 from causallearn.utils.KCI.KCI import KCI_CInd
@@ -5,6 +9,7 @@ from pycit.estimators import ksg_cmi
 from fcit import fcit
 from CCIT import CCIT
 from pcit.IndependenceTest import PCIT  ##  the 'mlxtend' package required
+from pcit import MetaEstimator
 from numpy.random import multivariate_normal as mnorm
 from pycop import simulation
 from scipy.stats import norm, expon
@@ -27,16 +32,16 @@ for i in range(0,10):
 	sigma1 = [ [1,rxy,rxz],[rxy,1,ryz],[rxz,ryz,1] ]
 
 	# normal
-	xyz = mnorm(m1, sigma1, 800) # tri-variate gaussian 
-	x = xyz[:,0]
-	y = xyz[:,1]
-	z = xyz[:,2]
+	#xyz = mnorm(m1, sigma1, 800) # tri-variate gaussian 
+	#x = xyz[:,0]
+	#y = xyz[:,1]
+	#z = xyz[:,2]
 	
 	# copula
-	# ncop1 = simulation.simu_gaussian(3,800,sigma1).T
-	# x = norm.ppf(ncop1[:,0], loc = 0, scale = 2)
-	# y = expon.ppf(ncop1[:,1], scale = 0.5)
-	# z = expon.ppf(ncop1[:,2], scale = 2)
+	ncop1 = simulation.simu_gaussian(3,800,np.array(sigma1)).T
+	x = norm.ppf(ncop1[:,0], loc = 0, scale = 2)
+	y = expon.ppf(ncop1[:,1], scale = 0.5)
+	z = expon.ppf(ncop1[:,2], scale = 2)
 	
 	## copent
 	te1[i] = ci(x,y,z)
@@ -66,5 +71,6 @@ for i in range(0,10):
 data1 = np.vstack((cmi1,kci1,ci1,fcit1,ccit1,pcit1))
 df1 = pd.DataFrame(data1.T)
 df1.columns = ["cmi","kci","knn","fcit","ccit","pcit"]
-df1.to_csv("~/Rworks/bench/py1.csv")
+#df1.to_csv("~/Rworks/bench/py1a.csv") # simulation 1 - normal distribution
+df1.to_csv("~/Rworks/bench/py1b.csv") # simulation 2 - copula function
 
