@@ -54,7 +54,8 @@ for (i in 1:10){
 }
 
 # python results
-py1 = read.csv("~/Rworks/bench/py1.csv")
+# py1 = read.csv("~/Rworks/bench/py1a.csv") # simulation 1 - normal
+py1 = read.csv("~/Rworks/bench/py1b.csv") # simulation 2 - copula
 kci = py1$kci
 cmi1 = py1$knn
 cmi2 = py1$cmi
