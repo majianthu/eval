@@ -1,4 +1,6 @@
+library(copula)
 library(corrplot)
+library(latex2exp)
 library(mnormt)
 library(copent) # transfer entropy (TE)
 library(CondIndTests) # kernel-based CI test (KCI)
@@ -13,18 +15,7 @@ library(CondCopulas) # Conditional Kendall's Tau (CKT)
 library(EDMeasure) # Conditional Mean Dependence (CMD)
 source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
 
-ce = 0
-kci = 0
-rcot = 0
-cdc = 0
-codec = 0
-gcm = 0
-wgcm = 0
-kpc = 0
-pcor = 0
-ckt = 0
-cmd = 0
-pcop = 0
+ce = kci = rcot = cdc = codec = gcm = wgcm = kpc = pcor = ckt = cmd = pcop = 0
 
 for (i in 1:10){
   rxy = 0.7
@@ -54,8 +45,8 @@ for (i in 1:10){
 }
 
 # python results
-# py1 = read.csv("~/Rworks/bench/py1a.csv") # simulation 1 - normal
-py1 = read.csv("~/Rworks/bench/py1b.csv") # simulation 2 - copula
+py1 = read.csv("~/Rworks/bench/py1a.csv") # simulation 1 - normal distribution
+#py1 = read.csv("~/Rworks/bench/py1b.csv") # simulation 2 - copula function
 kci = py1$kci
 cmi1 = py1$knn
 cmi2 = py1$cmi
@@ -71,19 +62,22 @@ corrplot(cor(joint1), method = "shade", order = "hclust", col = COL2(n=200))
 # plotting
 x11(width = 10, height = 12)
 par(mfrow = c(4,4))
-plot(ce, xlab = "rho", ylab = "stats", main = "CE");lines(ce)
-plot(kci, xlab = "rho", ylab = "stats", main = "KCI");lines(kci)
-plot(rcot, xlab = "rho", ylab = "stats", main = "RCoT");lines(rcot)
-plot(cdc, xlab = "rho", ylab = "stats", main = "CDC");lines(cdc)
-plot(codec, xlab = "rho", ylab = "stats", main = "CODEC");lines(codec)
-plot(gcm, xlab = "rho", ylab = "stats", main = "GCM");lines(gcm)
-plot(wgcm, xlab = "rho", ylab = "stats", main = "wGCM");lines(wgcm)
-plot(kpc, xlab = "rho", ylab = "stats", main = "KPC");lines(kpc)
-plot(pcor, xlab = "rho", ylab = "stats", main = "Partial Correlation");lines(pcor)
-plot(cmd, xlab = "rho", ylab = "stats", main = "CMD");lines(cmd)
-plot(pcop, xlab = "rho", ylab = "stats", main = "PartialCopula");lines(pcop)
-plot(cmi1, xlab = "rho", ylab = "stats", main = "CMI1");lines(cmi1)
-plot(cmi2, xlab = "rho", ylab = "stats", main = "CMI2");lines(cmi2)
-plot(ccit, xlab = "rho", ylab = "stats", main = "CCIT");lines(ccit)
-plot(fcit, xlab = "rho", ylab = "stats", main = "FCIT");lines(fcit)
-plot(pcit, xlab = "rho", ylab = "stats", main = "PCIT");lines(pcit)
+rho1 = seq(0,0.9,0.1); xlab1 = TeX(r'($\rho_{xz}$)')
+plot(rho1,ce, xlab = xlab1, ylab = "stats", main = "CE");lines(rho1,ce)
+plot(rho1,kci, xlab = xlab1, ylab = "stats", main = "KCI");lines(rho1,kci)
+plot(rho1,rcot, xlab = xlab1, ylab = "stats", main = "RCoT");lines(rho1,rcot)
+plot(rho1,cdc, xlab = xlab1, ylab = "stats", main = "CDC");lines(rho1,cdc)
+plot(rho1,codec, xlab = xlab1, ylab = "stats", main = "CODEC");lines(rho1,codec)
+plot(rho1,gcm, xlab = xlab1, ylab = "stats", main = "GCM");lines(rho1,gcm)
+plot(rho1,wgcm, xlab = xlab1, ylab = "stats", main = "wGCM");lines(rho1,wgcm)
+plot(rho1,kpc, xlab = xlab1, ylab = "stats", main = "KPC");lines(rho1,kpc)
+plot(rho1,pcor, xlab = xlab1, ylab = "stats", main = "Partial Correlation");lines(rho1,pcor)
+plot(rho1,cmd, xlab = xlab1, ylab = "stats", main = "CMD");lines(rho1,cmd)
+plot(rho1,pcop, xlab = xlab1, ylab = "stats", main = "PartialCopula");lines(rho1,pcop)
+plot(rho1,cmi1, xlab = xlab1, ylab = "stats", main = "CMI1");lines(rho1,cmi1)
+plot(rho1,cmi2, xlab = xlab1, ylab = "stats", main = "CMI2");lines(rho1,cmi2)
+plot(rho1,ccit, xlab = xlab1, ylab = "stats", main = "CCIT");lines(rho1,ccit)
+plot(rho1,fcit, xlab = xlab1, ylab = "stats", main = "FCIT");lines(rho1,fcit)
+plot(rho1,pcit, xlab = xlab1, ylab = "stats", main = "PCIT");lines(rho1,pcit)
+
+
