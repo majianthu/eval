@@ -69,85 +69,21 @@ x11()
 corrplot(cor(joint1), method = "shade", order = "hclust", col = COL2(n=200))
 
 # plotting
-w1 = 5; h1 = 5
-
-# TE via CE
-x11(width = w1, height = h1)
-plot(ce, xlab = "rho", ylab = "CI")
-lines(ce)
-
-# KCI
-x11(width = w1, height = h1)
-plot(kci, xlab = "rho", ylab = "KCI")
-lines(kci)
-
-# RCoT
-x11(width = w1, height = h1)
-plot(rcot, xlab = "rho", ylab = "RCoT")
-lines(rcot)
-
-# CDC
-x11(width = w1, height = h1)
-plot(cdc, xlab = "rho", ylab = "CDC")
-lines(cdc)
-
-# CODEC
-x11(width = w1, height = h1)
-plot(codec, xlab = "rho", ylab = "CODEC")
-lines(codec)
-
-# GCM
-x11(width = w1, height = h1)
-plot(gcm, xlab = "rho", ylab = "GCM")
-lines(gcm)
-
-# wGCM
-x11(width = w1, height = h1)
-plot(wgcm, xlab = "rho", ylab = "wGCM")
-lines(wgcm)
-
-# KPC
-x11(width = w1, height = h1)
-plot(kpc, xlab = "rho", ylab = "KPC")
-lines(kpc)
-
-# Partial Correlation
-x11(width = w1, height = h1)
-plot(pcor, xlab = "rho", ylab = "Partial Correlation")
-lines(pcor)
-
-# Conditional Mean Dependence
-x11(width = w1, height = h1)
-plot(cmd, xlab = "rho", ylab = "CMD")
-lines(cmd)
-
-# partial copula based CI test
-x11(width = w1, height = h1)
-plot(pcop, xlab = "rho", ylab = "PartialCopula")
-lines(pcop)
-
-# cmi1
-# x11(width = w1, height = h1)
-plot(cmi1, xlab = "rho", ylab = "CMI1")
-lines(cmi1)
-
-# cmi2
-x11(width = w1, height = h1)
-plot(cmi2, xlab = "rho", ylab = "CMI2")
-lines(cmi2)
-
-# ccit
-x11(width = w1, height = h1)
-plot(ccit, xlab = "rho", ylab = "CCIT")
-lines(ccit)
-
-# fcit
-x11(width = w1, height = h1)
-plot(fcit, xlab = "rho", ylab = "FCIT")
-lines(fcit)
-
-# pcit
-x11(width = w1, height = h1)
-plot(pcit, xlab = "rho", ylab = "PCIT")
-lines(pcit)
-
+x11(width = 10, height = 12)
+par(mfrow = c(4,4))
+plot(ce, xlab = "rho", ylab = "stats", main = "CE");lines(ce)
+plot(kci, xlab = "rho", ylab = "stats", main = "KCI");lines(kci)
+plot(rcot, xlab = "rho", ylab = "stats", main = "RCoT");lines(rcot)
+plot(cdc, xlab = "rho", ylab = "stats", main = "CDC");lines(cdc)
+plot(codec, xlab = "rho", ylab = "stats", main = "CODEC");lines(codec)
+plot(gcm, xlab = "rho", ylab = "stats", main = "GCM");lines(gcm)
+plot(wgcm, xlab = "rho", ylab = "stats", main = "wGCM");lines(wgcm)
+plot(kpc, xlab = "rho", ylab = "stats", main = "KPC");lines(kpc)
+plot(pcor, xlab = "rho", ylab = "stats", main = "Partial Correlation");lines(pcor)
+plot(cmd, xlab = "rho", ylab = "stats", main = "CMD");lines(cmd)
+plot(pcop, xlab = "rho", ylab = "stats", main = "PartialCopula");lines(pcop)
+plot(cmi1, xlab = "rho", ylab = "stats", main = "CMI1");lines(cmi1)
+plot(cmi2, xlab = "rho", ylab = "stats", main = "CMI2");lines(cmi2)
+plot(ccit, xlab = "rho", ylab = "stats", main = "CCIT");lines(ccit)
+plot(fcit, xlab = "rho", ylab = "stats", main = "FCIT");lines(fcit)
+plot(pcit, xlab = "rho", ylab = "stats", main = "PCIT");lines(pcit)
