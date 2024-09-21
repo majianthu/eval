@@ -8,14 +8,15 @@ library(RCIT) # Randomized conditional Correlation Test (RCoT)
 library(cdcsis) # conditional distance correlation (CDC)
 library(FOCI) # conditional dependence coefficient (CODEC)
 library(GeneralisedCovarianceMeasure) # Generalised Covariance Measure (GCM)
-library(weightedGCM) # weighted GCM
+library(weightedGCM) # weighted GCM (wGCM)
+library(comets) # projected covariance measure (pcm)
 library(KPC) # Kernel Partial Correlation (KPC)
 library(ppcor) # Partial Correlation (pcor)
 library(CondCopulas) # Conditional Kendall's Tau (CKT)
 library(EDMeasure) # Conditional Mean Dependence (CMD)
 source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
 
-ce = kci = rcot = cdc = codec = gcm = wgcm = kpc = pcor = ckt = cmd = pcop = 0
+ce = kci = rcot = cdc = codec = gcm = wgcm = pcm = kpc = pcor = cmd = pcop = 0
 
 for (i in 1:10){
   rxy = 0.7
@@ -38,6 +39,7 @@ for (i in 1:10){
   codec[i] = codec(x,y,z)
   gcm[i] = gcm.test(x,y,z)$test.statistic
   wgcm[i] = wgcm.est(x,y,z, regr.meth = "xgboost", beta = 0.7)
+  pcm[i] = pcm(x,y,z)$statistic
   kpc[i] = KPCRKHS(x,z,y)
   pcor[i] = pcor.test(x,y,z)$statistic
   cmd[i] = cmdm_test(x,y,z, compute = "R")$stat
@@ -60,8 +62,8 @@ x11()
 corrplot(cor(joint1), method = "shade", order = "hclust", col = COL2(n=200))
 
 # plotting
-x11(width = 10, height = 12)
-par(mfrow = c(4,4))
+x11(width = 12, height = 7)
+par(mfrow = c(3,6))
 rho1 = seq(0,0.9,0.1); xlab1 = TeX(r'($\rho_{xz}$)')
 plot(rho1,ce, xlab = xlab1, ylab = "stats", main = "CE");lines(rho1,ce)
 plot(rho1,kci, xlab = xlab1, ylab = "stats", main = "KCI");lines(rho1,kci)
@@ -70,6 +72,7 @@ plot(rho1,cdc, xlab = xlab1, ylab = "stats", main = "CDC");lines(rho1,cdc)
 plot(rho1,codec, xlab = xlab1, ylab = "stats", main = "CODEC");lines(rho1,codec)
 plot(rho1,gcm, xlab = xlab1, ylab = "stats", main = "GCM");lines(rho1,gcm)
 plot(rho1,wgcm, xlab = xlab1, ylab = "stats", main = "wGCM");lines(rho1,wgcm)
+plot(rho1,pcm, xlab = xlab1, ylab = "stats", main = "PCM");lines(rho1,pcm)
 plot(rho1,kpc, xlab = xlab1, ylab = "stats", main = "KPC");lines(rho1,kpc)
 plot(rho1,pcor, xlab = xlab1, ylab = "stats", main = "Partial Correlation");lines(rho1,pcor)
 plot(rho1,cmd, xlab = xlab1, ylab = "stats", main = "CMD");lines(rho1,cmd)
