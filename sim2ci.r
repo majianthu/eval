@@ -9,10 +9,9 @@ library(cdcsis) # conditional distance correlation (CDC)
 library(FOCI) # conditional dependence coefficient (CODEC)
 library(GeneralisedCovarianceMeasure) # Generalised Covariance Measure (GCM)
 library(weightedGCM) # weighted GCM (wGCM)
-library(comets) # projected covariance measure (pcm)
+library(comets) # projected covariance measure (PCM)
 library(KPC) # Kernel Partial Correlation (KPC)
 library(ppcor) # Partial Correlation (pcor)
-library(CondCopulas) # Conditional Kendall's Tau (CKT)
 library(EDMeasure) # Conditional Mean Dependence (CMD)
 source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
 
