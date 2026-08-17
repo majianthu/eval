@@ -15,7 +15,12 @@ library(ppcor) # Partial Correlation (pcor)
 library(EDMeasure) # Conditional Mean Dependence (CMD)
 source("https://raw.githubusercontent.com/lassepetersen/partial-copula-CI-test/main/parCopCITest.R") # partial copula based CI test
 
+cegauss <- function(mat){
+  0.5 * log(det(mat))
+}
+
 ce = kci = rcot = cdc = codec = gcm = wgcm = pcm = kpc = pcor = cmd = pcop = 0
+true = 0
 
 for (i in 1:10){
   rxy = 0.7
@@ -30,6 +35,11 @@ for (i in 1:10){
   # xyz <- rMvdc(800, mv.NE)
   
   x = xyz[,1]; y = xyz[,2]; z = xyz[,3]
+
+  sigma = matrix(c(1,rxy,rxz,rxy,1,ryz,rxz,ryz,1),3,3)
+  cor_xz = matrix(c(1,rxz,rxz,1),nrow = 2)
+  cor_yz = matrix(c(1,ryz,ryz,1),nrow = 2)
+  true[i] = cegauss(cor_xz) + cegauss(cor_yz) - cegauss(sigma)
   
   ce[i] = ci(x,y,z)
   kci[i] = KCI(x,y,z)$testStatistic
@@ -64,7 +74,8 @@ corrplot(cor(joint1), method = "shade", order = "hclust", col = COL2(n=200))
 x11(width = 12, height = 7)
 par(mfrow = c(3,6))
 rho1 = seq(0,0.9,0.1); xlab1 = TeX(r'($\rho_{xz}$)')
-plot(rho1,ce, xlab = xlab1, ylab = "stats", main = "CE");lines(rho1,ce)
+plot(rho1,ce, ylim = c(min(ce,true),max(ce,true)), xlab = xlab1, ylab = "stats", main = "CE");lines(rho1,ce)
+points(rho1,true,col="red");lines(rho1,true,col="red")
 plot(rho1,kci, xlab = xlab1, ylab = "stats", main = "KCI");lines(rho1,kci)
 plot(rho1,rcot, xlab = xlab1, ylab = "stats", main = "RCoT");lines(rho1,rcot)
 plot(rho1,cdc, xlab = xlab1, ylab = "stats", main = "CDC");lines(rho1,cdc)
@@ -76,8 +87,10 @@ plot(rho1,kpc, xlab = xlab1, ylab = "stats", main = "KPC");lines(rho1,kpc)
 plot(rho1,pcor, xlab = xlab1, ylab = "stats", main = "Partial Correlation");lines(rho1,pcor)
 plot(rho1,cmd, xlab = xlab1, ylab = "stats", main = "CMD");lines(rho1,cmd)
 plot(rho1,pcop, xlab = xlab1, ylab = "stats", main = "PartialCopula");lines(rho1,pcop)
-plot(rho1,cmi1, xlab = xlab1, ylab = "stats", main = "CMI1");lines(rho1,cmi1)
-plot(rho1,cmi2, xlab = xlab1, ylab = "stats", main = "CMI2");lines(rho1,cmi2)
+plot(rho1,cmi1, ylim = c(min(cmi1,true),max(cmi1,true)), xlab = xlab1, ylab = "stats", main = "CMI1");lines(rho1,cmi1)
+points(rho1,true,col="red");lines(rho1,true,col="red")
+plot(rho1,cmi2, ylim = c(min(cmi2,true),max(cmi2,true)), xlab = xlab1, ylab = "stats", main = "CMI2");lines(rho1,cmi2)
+points(rho1,true,col="red");lines(rho1,true,col="red")
 plot(rho1,ccit, xlab = xlab1, ylab = "stats", main = "CCIT");lines(rho1,ccit)
 plot(rho1,fcit, xlab = xlab1, ylab = "stats", main = "FCIT");lines(rho1,fcit)
 plot(rho1,pcit, xlab = xlab1, ylab = "stats", main = "PCIT");lines(rho1,pcit)
